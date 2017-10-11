@@ -1,0 +1,42 @@
+.nav-wrapper{
+    background-color: darkgray;
+    color: black;
+}
+.page-footer{
+    background-color: darkgray ;
+}
+.footer-copyright{
+    background-color: darkgray ;
+    height: 50px;
+    color: white;
+
+}
+.circle{
+    width:19%;
+    margin-left: 60px;
+}
+
+#personal-info{
+    font-size: larger;
+}
+p{
+    font-size: larger;
+}
+.edu{
+    width: 350px;
+    height:200px;
+}
+.collapsible-header{
+    color: coral;
+    font-size: larger;
+}
+.card{
+    color: coral;
+    height:350px;
+    width:350px;
+    margin-right: 100px;
+
+}
+.descri{
+    font-size: larger;
+}
