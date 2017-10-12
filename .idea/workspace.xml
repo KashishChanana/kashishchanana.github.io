@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cf97324f-2419-433b-8f52-ff017c085ae1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -275,12 +274,20 @@
       <workItem from="1504760385281" duration="1687000" />
       <workItem from="1504770304303" duration="501000" />
       <workItem from="1505204845419" duration="221000" />
-      <workItem from="1507710481220" duration="10973000" />
+      <workItem from="1507710481220" duration="11044000" />
     </task>
+    <task id="LOCAL-00001" summary="few edits">
+      <created>1507788267422</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1507788267422</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54109000" />
+    <option name="totallyTimeSpent" value="54180000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
@@ -330,7 +337,8 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="few edits" />
+    <option name="LAST_COMMIT_MESSAGE" value="few edits" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
