@@ -1,0 +1,568 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://kashishchanana.github.io/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://kashishchanana.github.io/theme/pygments/friendly.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="https://kashishchanana.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://kashishchanana.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://kashishchanana.github.io/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+<meta name="author" content="Kashish Chanana" />
+<meta name="description" content="Prompting a large language model (LLM) allows for faster development of AI applications. However, this process often requires multiple prompts and parsing of the LLM&#39;s output, which can involve writing extensive code. To simplify this development process, LangChain was created by Harrison Chase. LangChain is an open-source framework designed for …" />
+<meta name="keywords" content="Prompt-Engineering, LangChain">
+
+
+  <meta property="og:site_name" content="Hitchhiker's Guide To AI"/>
+  <meta property="og:title" content="LangChain - The Essentials"/>
+  <meta property="og:description" content="Prompting a large language model (LLM) allows for faster development of AI applications. However, this process often requires multiple prompts and parsing of the LLM&#39;s output, which can involve writing extensive code. To simplify this development process, LangChain was created by Harrison Chase. LangChain is an open-source framework designed for …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://kashishchanana.github.io/langchain-the-essentials.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2024-04-27 00:00:00-07:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://kashishchanana.github.io/author/kashish-chanana.html">
+  <meta property="article:section" content="LLMs"/>
+  <meta property="article:tag" content="Prompt-Engineering"/>
+  <meta property="article:tag" content="LangChain"/>
+  <meta property="og:image" content="images/profile.png">
+
+  <title>Hitchhiker's Guide To AI &ndash; LangChain - The Essentials</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://kashishchanana.github.io/">
+      <img src="images/profile.png" alt="Hitchhiker's 
+ Guide To AI" title="Hitchhiker's 
+ Guide To AI">
+    </a>
+
+    <h1>
+      <a href="https://kashishchanana.github.io/">Hitchhiker's 
+ Guide To AI</a>
+    </h1>
+
+    <p>Honestly started as a note-taking exercise!</p>
+
+
+
+    <ul class="social">
+      <li>
+        <a class="sc-github"
+           href="https://github.com/KashishChanana"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/kashishchanana/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-twitter"
+           href="https://twitter.com/chankashish"
+           target="_blank">
+          <i class="fa-brands fa-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-envelope"
+rel="me"           href="mailto:chananakashish1998@gmail.com"
+           target="_blank">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://kashishchanana.github.io/">Home</a>
+
+  <a href="/archives">Archives</a>
+  <a href="/categories">Categories</a>
+  <a href="/tags">Tags</a>
+
+
+</nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="langchain-the-essentials">LangChain - The Essentials</h1>
+    <p>
+      Posted on Sat 27 April 2024 in <a href="https://kashishchanana.github.io/category/llms.html">LLMs</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>Prompting a large language model (LLM) allows for faster development of AI applications. However, this process often requires multiple prompts and parsing of the LLM's output, which can involve writing extensive code. To simplify this development process, LangChain was created by Harrison Chase. LangChain is an open-source framework designed for building LLM applications and has gained widespread community adoption and contributions.</p>
+<p><img alt="star-history-2024130.png" src="images/star-history-2024130.png"></p>
+<h2>Key Features</h2>
+<p>LangChain provides two packages, one in Python and another in JavaScript. It emphasizes composition and modularity, offering various independent components that can be used together or separately. LangChain also offers different use cases and chains to combine these modular components into complete applications. The Langchain framework consists of six modules, each serving a different purpose in interacting with the LLM.</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Subcategory</th>
+<th>Integrations/Implementations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Models</td>
+<td>LLMs</td>
+<td>20+</td>
+</tr>
+<tr>
+<td></td>
+<td>Chat Models</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Text Embedding Models</td>
+<td>10+</td>
+</tr>
+<tr>
+<td>Prompts</td>
+<td>Prompt Templates</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Output Parsers</td>
+<td>5+</td>
+</tr>
+<tr>
+<td></td>
+<td>Example Selectors</td>
+<td>10+</td>
+</tr>
+<tr>
+<td>Indexes</td>
+<td>Document Loaders</td>
+<td>50+</td>
+</tr>
+<tr>
+<td></td>
+<td>Text Splitters</td>
+<td>10+</td>
+</tr>
+<tr>
+<td></td>
+<td>Vector Spaces</td>
+<td>10+</td>
+</tr>
+<tr>
+<td></td>
+<td>Retrievers</td>
+<td>5+</td>
+</tr>
+<tr>
+<td>Chains</td>
+<td>Prompt, LLM, Output parsing</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Building Blocks</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Application-specific Chains</td>
+<td>20+ types</td>
+</tr>
+<tr>
+<td></td>
+<td>Retrievers</td>
+<td>5+</td>
+</tr>
+<tr>
+<td>Agents</td>
+<td>Agent Types</td>
+<td>5+ types</td>
+</tr>
+<tr>
+<td></td>
+<td>Agent Toolkits</td>
+<td>10+ implementations</td>
+</tr>
+</tbody>
+</table>
+<h2>Notebook Walkthrough</h2>
+<p>The examples in this notebook can be accessed through Google Colab Notebook <a href="https://colab.research.google.com/drive/1FM09FaY64sWMF0CykgzQ4PQNiqRtIs60?usp=sharing">here.</a> Note that LLM's do not always produce the same results. When executing the code in your notebook, you may get slightly different result. </p>
+<h2>Models</h2>
+<p>Models refer to the language models that underpin many AI applications. When building an application using a large language model (LLM), there are often reusable models. We repeatedly prompt a model and parse its outputs, and LangChain provides easy abstractions to facilitate this type of operation.</p>
+<p>💡 Using Langchain’s models provides us with multiple models in one place. Examples of chat models include Alibaba Cloud, Anthropic, Anyscale, Azure OpenAI, Azure ML, Baidu Chat, Cohere, Google AI, Google Cloud Vertex AI, Hugging Face, Llama API, LlamaEdge, MistralAI, NVIDIA AI Foundation Endpoints, OpenAI and many more.</p>
+<p>Open AI’s API -</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Using Open AI’s APIs to make direct API calls to LLM.</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">openai</span>
+
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span><span class="p">,</span> <span class="n">find_dotenv</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">load_dotenv</span><span class="p">(</span><span class="n">find_dotenv</span><span class="p">())</span> <span class="c1"># read local .env file</span>
+<span class="n">openai</span><span class="o">.</span><span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;OPENAI_API_KEY&#39;</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">get_completion</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-3.5-turbo&quot;</span><span class="p">):</span>
+    <span class="n">messages</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">prompt</span><span class="p">}]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="n">messages</span><span class="p">,</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+<span class="n">get_completion</span><span class="p">(</span><span class="s2">&quot;Who is the President of United States of America?&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The above code snippet outputs - </p>
+<div class="highlight"><pre><span></span><code>As of September 2021, the President of the United States of America is Joe Biden.
+</code></pre></div>
+
+<p><em>(Note: LLMs do not always produce the same results. When executing the code, you may get slightly different answers)</em></p>
+<p>LangChain’s Model - </p>
+<p>To get OpenAI’s chatGPT API endpoint, we can import it via langchain’s chat_models. </p>
+<div class="highlight"><pre><span></span><code><span class="c1"># This is langchain&#39;s abstraction for the chatGPT API Endpoint</span>
+<span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+<span class="c1"># To control the randomness and creativity of the generated text by an LLM, </span>
+<span class="c1"># use temperature = 0.0</span>
+<span class="n">chat</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code>ChatOpenAI(verbose=False, callbacks=None, callback_manager=None, client=&lt;class &#39;openai.api_resources.chat_completion.ChatCompletion&#39;&gt;, model_name=&#39;gpt-3.5-turbo-0301&#39;, temperature=0.0, model_kwargs={}, openai_api_key=None, openai_api_base=None, openai_organization=None, request_timeout=None, max_retries=6, streaming=False, n=1, max_tokens=None)
+</code></pre></div>
+
+<h2>Prompts</h2>
+<p>Prompts are essential for guiding a large language model (LLM) by providing specific instructions and desired outputs. They serve as inputs to the models and can be detailed and lengthy, specifying the format and expected results. Prompt templates are a helpful tool for reusing effective prompts, and LangChain offers built-in templates for various tasks like summarization, answering questions, and integrating with databases or APIs. <a href="https://www.notion.so/Prompt-Engineering-4191027a1ff0432f8f5c09813165326f?pvs=21">Refer here to learn more about Prompt Engineering.</a></p>
+<p>Going back to the previous example, you can now chat with the previously defined language model by using ChatPromptTemplate.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.prompts</span> <span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+
+<span class="c1"># Define a template string</span>
+<span class="n">template_string</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Who is the President of United States of America?&quot;&quot;&quot;</span>
+
+<span class="n">prompt_template</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">template_string</span><span class="p">)</span>
+
+<span class="c1"># Call the LLM to translate to the style of the customer message</span>
+<span class="n">llm_response</span> <span class="o">=</span> <span class="n">chat</span><span class="p">(</span><span class="n">prompt_template</span><span class="o">.</span><span class="n">format_messages</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">llm_response</span><span class="p">)</span>
+</code></pre></div>
+
+<p>And you get the same reply as before.</p>
+<div class="highlight"><pre><span></span><code>As of September 2021,the President of the United States of America is Joe Biden.
+</code></pre></div>
+
+<p>But how did this help us? Well, let's consider this scenario where you want to find the President of Germany or a set of 50 countries. Now, imagine having to write the prompt again and again for each country. It would be a huge hassle! LangChain eliminates this inconvenience by providing a streamlined solution. Instead of writing 50 prompts for each country, LangChain allows you to simplify the process and save time and effort.</p>
+<p>We can now define the prompt template with an input variable as <code>country</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">template_string</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Who is the President of ```</span><span class="si">{country}</span><span class="s2">```?&quot;&quot;&quot;</span>
+<span class="n">prompt_template</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">template_string</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">prompt_template</span><span class="o">.</span><span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">prompt</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Returns - </span>
+<span class="sd">PromptTemplate(input_variables=[&#39;country&#39;], output_parser=None, partial_variables={}, template=&#39;Who is the President of ```{country}```?&#39;, template_format=&#39;f-string&#39;, validate_template=True)</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">prompt_template</span><span class="o">.</span><span class="n">messages</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">input_variables</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Returns - [&#39;country&#39;]</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</code></pre></div>
+
+<p>Now, to check who the President of Germany or any other country is, all we need to do is replace the input variable with a country of my choice.</p>
+<div class="highlight"><pre><span></span><code><span class="n">chat</span><span class="p">(</span><span class="n">prompt_template</span><span class="o">.</span><span class="n">format_messages</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="s2">&quot;Germany&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">content</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Returns - </span>
+<span class="sd">&#39;As of September 2021, the President of Germany is Frank-Walter Steinmeier.&#39;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</code></pre></div>
+
+<h2>Parsers</h2>
+<p>Output parsing is another important aspect of LangChain. When instructing an LLM to generate output in a specific format, such as using specific keywords or tags, parsers help extract and interpret the relevant information from the LLM's output. This allows for more precise control and easier downstream processing. </p>
+<p>Let us consider an example to find the names of 3 sports that don't use balls.</p>
+<div class="highlight"><pre><span></span><code><span class="n">list_item_string</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;List names of 3 ```</span><span class="si">{things}</span><span class="s2">```.&quot;&quot;&quot;</span>
+<span class="n">item_template</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="n">list_item_string</span><span class="p">)</span>
+
+<span class="n">chat</span><span class="p">(</span><span class="n">item_template</span><span class="o">.</span><span class="n">format_messages</span><span class="p">(</span><span class="n">things</span><span class="o">=</span> <span class="s2">&quot;sports that don&#39;t use balls&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">content</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Returns-</span>
+
+<span class="sd">1. Swimming</span>
+<span class="sd">2. Track and field</span>
+<span class="sd">3. Gymnastics</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<p>Great! Now, what if we wanted this in CSV format? By specifying these schemas and using LangChain's output parser, we can extract and format the relevant information from the LLM's response.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Import CommaSeparatedListOutputParser from the langchain.output_parsers module.</span>
+<span class="kn">from</span> <span class="nn">langchain.output_parsers</span> <span class="kn">import</span> <span class="n">CommaSeparatedListOutputParser</span>
+
+<span class="c1"># Initialize an instance of CommaSeparatedListOutputParser.</span>
+<span class="n">output_parser</span> <span class="o">=</span> <span class="n">CommaSeparatedListOutputParser</span><span class="p">()</span>
+
+<span class="c1"># Retrieve the format instructions for the output parser.</span>
+<span class="c1"># This method likely returns a string or some form of instructions</span>
+<span class="c1"># on how to format outputs to be compatible with this parser.</span>
+<span class="n">format_instructions</span> <span class="o">=</span> <span class="n">output_parser</span><span class="o">.</span><span class="n">get_format_instructions</span><span class="p">()</span>
+
+<span class="n">format_instructions</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Returns -</span>
+<span class="sd">Your response should be a list of comma-separated values, eg: `foo, bar, baz`</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<p>To use these format instructions, we simply add them to our template and evaluate them as partial variables.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Define a template string for listing items. The template includes placeholders</span>
+<span class="c1"># for &#39;things&#39; to list and &#39;format_instructions&#39; that describe how the list </span>
+<span class="c1"># should be formatted.</span>
+<span class="n">list_item_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">List names of 3 ```</span><span class="si">{things}</span><span class="s2">```</span>
+
+<span class="s2">```</span><span class="si">{format_instructions}</span><span class="s2">```</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># The &#39;from_template&#39; method is used to instantiate the template object,</span>
+<span class="c1"># and &#39;partial_variables&#39; is used to provide predefined values for some of the</span>
+<span class="c1"># variables within the template.</span>
+<span class="n">item_template_with_format_instructions</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span>
+    <span class="n">list_item_template</span><span class="p">,</span>
+    <span class="n">partial_variables</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;format_instructions&quot;</span><span class="p">:</span> <span class="n">format_instructions</span><span class="p">}</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Now, let's use this template to find the names of 3 sports that don't use balls in a CSV format.</p>
+<div class="highlight"><pre><span></span><code><span class="n">output</span> <span class="o">=</span> <span class="n">chat</span><span class="p">(</span><span class="n">item_template_with_format_instructions</span><span class="o">.</span><span class="n">format_messages</span><span class="p">(</span>
+<span class="n">things</span><span class="o">=</span> <span class="s2">&quot;sports that don&#39;t use balls&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">content</span>
+<span class="n">output</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Returns -</span>
+<span class="sd">swimming, track and field, gymnastics</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<p>If you were to go find the <code>type</code> of <code>output</code>, you’d see the type as a string. In order to get type as a <code>list</code>, simply use the parser to parse the output, and voila, you have a list with you.</p>
+<div class="highlight"><pre><span></span><code><span class="n">output_parser</span> <span class="o">=</span> <span class="n">CommaSeparatedListOutputParser</span><span class="p">()</span>
+<span class="n">output_parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Returns-</span>
+<span class="sd">[&#39;swimming&#39;, &#39;track and field&#39;, &#39;gymnastics&#39;]</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<p>As we’ve explored, these parsers enhance the usability of raw outputs and pave the way for more advanced applications and integrations. Langchain offers several output parsers that can be explored <a href="https://python.langchain.com/docs/modules/model_io/output_parsers/">here</a>.</p>
+<h2>Memory</h2>
+<p>Using the previously defined <code>get_completion</code> function that uses OpenAI’s API, let's have a brief conversation.</p>
+<p><img alt="LangChain" src="images/LangChain.png"></p>
+<p>When building applications like chatbots, a major challenge arises from the fact that language models typically do not retain information from past interactions. This limitation becomes apparent when we aim to have dynamic and continuous conversations with the model. In the field of conversational AI, the ability of language models to remember previous parts of a conversation becomes crucial for creating seamless and coherent interactions between users and AI assistants.</p>
+<p>To address this issue, memory mechanisms are implemented to store and recall past conversations. These mechanisms enable a more natural and context-aware dialogue, allowing the language model to maintain a sense of continuity and better understand the user's intent.</p>
+<h3>Conversational Memory Buffer</h3>
+<p>Let's start by importing the required modules and starting a conversation chain with our LLM.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span> <span class="nn">langchain.chains</span> <span class="kn">import</span> <span class="n">ConversationChain</span>
+<span class="kn">from</span> <span class="nn">langchain.memory</span> <span class="kn">import</span> <span class="n">ConversationBufferMemory</span>
+
+<span class="c1"># Initialize a ConversationBufferMemory object.</span>
+<span class="c1"># This object is designed to store and manage the history of the conversation,</span>
+<span class="c1"># allowing the system to recall previous exchanges or context.</span>
+<span class="n">memory</span> <span class="o">=</span> <span class="n">ConversationBufferMemory</span><span class="p">()</span>
+
+<span class="c1"># Create a ConversationChain object with specific configurations.</span>
+<span class="c1"># llm parameter specifies the language model to use, in this case, ChatOpenAI with a specified temperature.</span>
+<span class="c1"># Temperature controls the randomness of the output. A temperature of 0.0 makes the model&#39;s responses deterministic.</span>
+<span class="n">conversation</span> <span class="o">=</span> <span class="n">ConversationChain</span><span class="p">(</span>
+    <span class="n">llm</span><span class="o">=</span><span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mf">0.0</span><span class="p">),</span> 
+        <span class="c1"># Assign the previously initialized memory object to manage </span>
+        <span class="c1"># the conversation&#39;s memory.</span>
+    <span class="n">memory</span><span class="o">=</span><span class="n">memory</span><span class="p">,</span>
+    <span class="c1"># The verbose parameter, when set to True, likely enables detailed logging</span>
+        <span class="c1"># of the conversation process for debugging or transparency purposes.</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Now, we tell our name to the LLM. As you can see from the below conversation chain, the current conversation is being recorded. </p>
+<p><img alt="LangChain" src="images/LangChain%201.png"></p>
+<p>Let's go on to ask the same question as before: what is 1+1?</p>
+<p><img alt="LangChain" src="images/LangChain%202.png"></p>
+<p>Note carefully that the conversation does have the previous context. Upon asking the question “What is my name?”, the LLM will be able to take in the conversation history that has been recorded as the new context and answer correctly, unlike before.</p>
+<p><img alt="LangChain" src="images/LangChain%203.png"></p>
+<p>In the above example, the buffer recorded the conversation. You can access the memory buffer using <code>memory.buffer</code> to see the history of the conversation. Further, you can also add more context to memory using the snippet of code below.</p>
+<div class="highlight"><pre><span></span><code><span class="n">memory</span><span class="o">.</span><span class="n">save_context</span><span class="p">({</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;Hi&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;What&#39;s up&quot;</span><span class="p">})</span>
+</code></pre></div>
+
+<p>💡 One thing to note here is that when you use a large language model for a chat conversation, the LLM  itself is actually <code>stateless</code>. The LLM does not retain the conversation history, and each API call is treated as an independent transaction, meaning that the LLM does not remember the conversation that has taken place so far.</p>
+<p>Chatbots often give the illusion of having memory because developers typically provide the full conversation history as context to the language model. This conversation history is stored explicitly in memory and used as input or additional context for the language model to generate its next response, making it seem like the chatbot remembers what has been said before. However, as the conversation becomes longer, the amount of memory required increases and it can become more costly to process a large number of tokens in the language model.</p>
+<p>LangChain provides several convenient kinds of memory to store and accumulate the conversation. So far, we've been looking at the ConversationBufferMemory. Let's look at a different type of memory.</p>
+<h3>Conversation Buffer Window Memory</h3>
+<p>The conversation buffer window memory only keeps a window of memory. This window is specified by the parameter <code>k</code>.To start off, we will import ConversationBufferWindowMemory and instantiate <code>k = 1</code>. Doing this will only keep the window as the last piece of conversation between LLM and the human agent.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.memory</span> <span class="kn">import</span> <span class="n">ConversationBufferWindowMemory</span>
+
+<span class="n">memory</span> <span class="o">=</span> <span class="n">ConversationBufferWindowMemory</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">memory</span><span class="o">.</span><span class="n">save_context</span><span class="p">({</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;Hi&quot;</span><span class="p">},</span>
+                    <span class="p">{</span><span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;What&#39;s up&quot;</span><span class="p">})</span>
+<span class="n">memory</span><span class="o">.</span><span class="n">save_context</span><span class="p">({</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;Not much, just hanging&quot;</span><span class="p">},</span>
+                    <span class="p">{</span><span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;Cool&quot;</span><span class="p">})</span>
+</code></pre></div>
+
+<p>Since k is set to one, the memory context should have only the last bit. </p>
+<div class="highlight"><pre><span></span><code><span class="n">memory</span><span class="o">.</span><span class="n">buffer</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Returns-</span>
+<span class="sd">Human: Not much, just hanging\nAI: Cool</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<p>Replaying the previous conversation with <code>k=1</code> again leads to LLM not knowing the user’s name.</p>
+<p><img alt="LangChain" src="images/LangChain%204.png"></p>
+<p>In practice, it is unlikely that you would use this with <code>k=1</code>. Instead, you would use this with k set to a larger number. This approach prevents the memory from growing excessively as the conversation continues. However, due to the fixed window length, it's possible to lose some past context more often than not. </p>
+<h3>Conversation Token Buffer Memory</h3>
+<p>With the conversational token buffer memory, the memory will limit the number of tokens saved. And because a lot of LLM pricing is based on tokens, this maps more directly to the cost of the LLM calls.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">langchain.memory</span> <span class="kn">import</span> <span class="n">ConversationTokenBufferMemory</span>
+<span class="kn">from</span> <span class="nn">langchain.llms</span> <span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">temperature</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+
+<span class="n">memory</span> <span class="o">=</span> <span class="n">ConversationTokenBufferMemory</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="n">max_token_limit</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">memory</span><span class="o">.</span><span class="n">save_context</span><span class="p">({</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;hi&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;whats up&quot;</span><span class="p">})</span>
+<span class="n">memory</span><span class="o">.</span><span class="n">save_context</span><span class="p">({</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;not much you&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;not much&quot;</span><span class="p">})</span>
+</code></pre></div>
+
+<p>With <code>max_token_limit</code>  set to <code>40</code>, we have the entire context saved. Reducing the token length drastically changes the context memory holds.</p>
+<p><img alt="LangChain" src="images/LangChain%205.png"></p>
+<h3>Conversation Summary Memory</h3>
+<p>The Conversation Summary Memory in LangChain is a more advanced type of memory that allows for the creation of a summary of the conversation over time. This feature is particularly useful for condensing information from the conversation and injecting the summary into prompts or chains. It helps to avoid using too many tokens when dealing with longer conversations where including the entire past message history in the prompt would be impractical.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># create a long string</span>
+<span class="n">schedule</span> <span class="o">=</span> <span class="s2">&quot;There is a meeting at 8 am with your product team. </span><span class="se">\</span>
+<span class="s2">You will need your PowerPoint presentation prepared. </span><span class="se">\</span>
+<span class="s2">9 am-12 pm have time to work on your LangChain </span><span class="se">\</span>
+<span class="s2">project, which will go quickly because Langchain is such a powerful tool. </span><span class="se">\</span>
+<span class="s2">At Noon, lunch at the Italian restaurant with a customer who is driving </span><span class="se">\</span>
+<span class="s2">from over an hour away to meet you to understand the latest in AI. </span><span class="se">\</span>
+<span class="s2">Be sure to bring your laptop to show the latest LLM demo.&quot;</span>
+
+<span class="n">memory</span> <span class="o">=</span> <span class="n">ConversationSummaryMemory</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">)</span>
+<span class="n">memory</span><span class="o">.</span><span class="n">save_context</span><span class="p">({</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;What&#39;s up&quot;</span><span class="p">})</span>
+<span class="n">memory</span><span class="o">.</span><span class="n">save_context</span><span class="p">({</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;Not much, just hanging&quot;</span><span class="p">},</span>
+                    <span class="p">{</span><span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;Cool&quot;</span><span class="p">})</span>
+<span class="n">memory</span><span class="o">.</span><span class="n">save_context</span><span class="p">({</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;What is on the schedule today?&quot;</span><span class="p">},</span> 
+                    <span class="p">{</span><span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">schedule</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">})</span>
+</code></pre></div>
+
+<p>On loading the memory variables, we see-</p>
+<div class="highlight"><pre><span></span><code><span class="n">memory</span><span class="o">.</span><span class="n">load_memory_variables</span><span class="p">({})</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Returns -</span>
+<span class="sd">{&#39;history&#39;: &#39;The human greets the AI, and the AI responds by asking what\&#39;s up. The human replies that they are not doing much, just hanging. The AI responds with a simple &quot;Cool.&quot; The human then asks about their schedule for the day. The AI informs them that they have a meeting at 8 am with their product team and need to prepare a PowerPoint presentation. From 9 am to 12 pm, they have time to work on their LangChain project, which will be quick due to the power of LangChain. At noon, they have a lunch meeting with a customer who is driving from over an hour away to learn about the latest in AI. The AI advises the human to bring their laptop to show the latest LLM demo.&#39;}</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<h3>Conversation Summary Buffer Memory</h3>
+<p>Conversation Summary Buffer Memory combines the two ideas. It keeps a buffer of recent interactions in memory, but rather than just completely flushing old interactions, it compiles them into a summary and uses both. It uses token length rather than a number of interactions to determine when to flush interactions.</p>
+<p>Going with the same long string as before, we can now use <code>max_token_limit</code> to limit length of memory buffer.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># setting max token length to 100</span>
+<span class="n">memory</span> <span class="o">=</span> <span class="n">ConversationSummaryBufferMemory</span><span class="p">(</span><span class="n">llm</span><span class="o">=</span><span class="n">llm</span><span class="p">,</span> <span class="n">max_token_limit</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">memory</span><span class="o">.</span><span class="n">save_context</span><span class="p">({</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello&quot;</span><span class="p">},</span> <span class="p">{</span><span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;What&#39;s up&quot;</span><span class="p">})</span>
+<span class="n">memory</span><span class="o">.</span><span class="n">save_context</span><span class="p">({</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;Not much, just hanging&quot;</span><span class="p">},</span>
+                    <span class="p">{</span><span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;Cool&quot;</span><span class="p">})</span>
+<span class="n">memory</span><span class="o">.</span><span class="n">save_context</span><span class="p">({</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="s2">&quot;What is on the schedule today?&quot;</span><span class="p">},</span> 
+                    <span class="p">{</span><span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">schedule</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">})</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">memory</span><span class="o">.</span><span class="n">load_memory_variables</span><span class="p">({})</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Returns -</span>
+<span class="sd">{&#39;history&#39;: &#39;System: The human and AI exchange greetings. The human asks about the schedule for the day. The AI provides a detailed schedule, including a meeting with the product team, work on the LangChain project, and a lunch meeting with a customer interested in AI. The AI emphasizes the importance of bringing a laptop to showcase the latest LLM demo during the lunch meeting.&#39;}</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</code></pre></div>
+
+<p>Do notice the change in history when using summary memory and summery with max token memory.</p>
+<h1>References</h1>
+<ol>
+<li><a href="https://python.langchain.com/docs/get_started/introduction">https://python.langchain.com/docs/get_started/introduction</a></li>
+<li><a href="https://learn.deeplearning.ai/langchain/lesson/1/introduction">https://learn.deeplearning.ai/langchain/lesson/1/introduction</a></li>
+<li><a href="https://www.comet.com/site/blog/mastering-output-parsing-in-langchain/">https://www.comet.com/site/blog/mastering-output-parsing-in-langchain/</a></li>
+</ol>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://kashishchanana.github.io/tag/prompt-engineering.html">Prompt-Engineering</a>
+      <a href="https://kashishchanana.github.io/tag/langchain.html">LangChain</a>
+    </p>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy;  </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Hitchhiker's Guide To AI ",
+  "url" : "https://kashishchanana.github.io",
+  "image": "images/profile.png",
+  "description": ""
+}
+</script>
+</body>
+</html>
