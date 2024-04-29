@@ -46,7 +46,7 @@
   <meta property="og:locale" content="en_US"/>
   <meta property="og:url" content="https://kashishchanana.github.io/langchain-the-essentials.html"/>
   <meta property="og:type" content="article"/>
-  <meta property="article:published_time" content="2024-04-26 00:00:00-07:00"/>
+  <meta property="article:published_time" content="2024-02-26 00:00:00-08:00"/>
   <meta property="article:modified_time" content=""/>
   <meta property="article:author" content="https://kashishchanana.github.io/author/kashish-chanana.html">
   <meta property="article:section" content="LLMs"/>
@@ -124,7 +124,7 @@ rel="me"           href="mailto:chananakashish1998@gmail.com"
       
     <h1 id="langchain-the-essentials">LangChain - The Essentials</h1>
     <p>
-      Posted on Fri 26 April 2024 in <a href="https://kashishchanana.github.io/category/llms.html">LLMs</a>
+      Posted on Mon 26 February 2024 in <a href="https://kashishchanana.github.io/category/llms.html">LLMs</a>
 
     </p>
   </header>
@@ -133,6 +133,7 @@ rel="me"           href="mailto:chananakashish1998@gmail.com"
   <div>
     <p>Prompting a large language model (LLM) allows for faster development of AI applications. However, this process often requires multiple prompts and parsing of the LLM's output, which can involve writing extensive code. To simplify this development process, LangChain was created by Harrison Chase. LangChain is an open-source framework designed for building LLM applications and has gained widespread community adoption and contributions.</p>
 <p><img alt="star-history-2024130.png" src="images/star-history-2024130.png"></p>
+<hr>
 <h2>Key Features</h2>
 <p>LangChain provides two packages, one in Python and another in JavaScript. It emphasizes composition and modularity, offering various independent components that can be used together or separately. LangChain also offers different use cases and chains to combine these modular components into complete applications. The Langchain framework consists of six modules, each serving a different purpose in interacting with the LLM.</p>
 <table>
@@ -226,8 +227,10 @@ rel="me"           href="mailto:chananakashish1998@gmail.com"
 </tr>
 </tbody>
 </table>
+<hr>
 <h2>Notebook Walkthrough</h2>
 <p>The examples in this notebook can be accessed through Google Colab Notebook <a href="https://colab.research.google.com/drive/1FM09FaY64sWMF0CykgzQ4PQNiqRtIs60?usp=sharing">here.</a> Note that LLM's do not always produce the same results. When executing the code in your notebook, you may get slightly different result. </p>
+<hr>
 <h2>Models</h2>
 <p>Models refer to the language models that underpin many AI applications. When building an application using a large language model (LLM), there are often reusable models. We repeatedly prompt a model and parse its outputs, and LangChain provides easy abstractions to facilitate this type of operation.</p>
 <p>💡 Using Langchain’s models provides us with multiple models in one place. Examples of chat models include Alibaba Cloud, Anthropic, Anyscale, Azure OpenAI, Azure ML, Baidu Chat, Cohere, Google AI, Google Cloud Vertex AI, Hugging Face, Llama API, LlamaEdge, MistralAI, NVIDIA AI Foundation Endpoints, OpenAI and many more.</p>
@@ -270,6 +273,7 @@ rel="me"           href="mailto:chananakashish1998@gmail.com"
 <div class="highlight"><pre><span></span><code>ChatOpenAI(verbose=False, callbacks=None, callback_manager=None, client=&lt;class &#39;openai.api_resources.chat_completion.ChatCompletion&#39;&gt;, model_name=&#39;gpt-3.5-turbo-0301&#39;, temperature=0.0, model_kwargs={}, openai_api_key=None, openai_api_base=None, openai_organization=None, request_timeout=None, max_retries=6, streaming=False, n=1, max_tokens=None)
 </code></pre></div>
 
+<hr>
 <h2>Prompts</h2>
 <p>Prompts are essential for guiding a large language model (LLM) by providing specific instructions and desired outputs. They serve as inputs to the models and can be detailed and lengthy, specifying the format and expected results. Prompt templates are a helpful tool for reusing effective prompts, and LangChain offers built-in templates for various tasks like summarization, answering questions, and integrating with databases or APIs. <a href="https://www.notion.so/Prompt-Engineering-4191027a1ff0432f8f5c09813165326f?pvs=21">Refer here to learn more about Prompt Engineering.</a></p>
 <p>Going back to the previous example, you can now chat with the previously defined language model by using ChatPromptTemplate.</p>
@@ -319,6 +323,7 @@ rel="me"           href="mailto:chananakashish1998@gmail.com"
 <span class="sd">&#39;&#39;&#39;</span>
 </code></pre></div>
 
+<hr>
 <h2>Parsers</h2>
 <p>Output parsing is another important aspect of LangChain. When instructing an LLM to generate output in a specific format, such as using specific keywords or tags, parsers help extract and interpret the relevant information from the LLM's output. This allows for more precise control and easier downstream processing. </p>
 <p>Let us consider an example to find the names of 3 sports that don't use balls.</p>
@@ -396,6 +401,7 @@ rel="me"           href="mailto:chananakashish1998@gmail.com"
 </code></pre></div>
 
 <p>As we’ve explored, these parsers enhance the usability of raw outputs and pave the way for more advanced applications and integrations. Langchain offers several output parsers that can be explored <a href="https://python.langchain.com/docs/modules/model_io/output_parsers/">here</a>.</p>
+<hr>
 <h2>Memory</h2>
 <p>Using the previously defined <code>get_completion</code> function that uses OpenAI’s API, let's have a brief conversation.</p>
 <p><img alt="LangChain" src="images/LangChain.png"></p>

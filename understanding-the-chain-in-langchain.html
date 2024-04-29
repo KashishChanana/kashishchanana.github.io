@@ -130,8 +130,7 @@ rel="me"           href="mailto:chananakashish1998@gmail.com"
 
 
   <div>
-    <p>This blog post focuses on a crucial component of LangChain, the "chain". The chain is a tool that integrates a large language model (LLM) with a prompt, enabling the execution of a series of operations on text or other data. </p>
-<p>In LangChain's context, "Chains" symbolize a predefined series of operations that aim to simplify and transform complex processes into a format that is easier to manage and understand. Chains require a particular sequence of actions and are perfect for workflows with a consistent set of steps, making them ideally suited for fixed, predefined sequences.</p>
+    <p>This blog post focuses on a crucial component of LangChain, the "chain". The chain is a tool that integrates a large language model (LLM) with a prompt, enabling the execution of a series of operations on text or other data. In LangChain's context, "Chains" symbolize a predefined series of operations that aim to simplify and transform complex processes into a format that is easier to manage and understand. Chains require a particular sequence of actions and are perfect for workflows with a consistent set of steps, making them ideally suited for fixed, predefined sequences.</p>
 <h2>LLM Chain</h2>
 <p>First, we will discuss the LLM chain, a simple yet powerful component. You need to import the OpenAI model, the chat prompt template, and the LLM chain. By combining the LLM with the prompt, an LLM chain is created. This chain can generate optimal names for companies based on their products. </p>
 <p>In the below example, we run this chain to yield a hypothetical company name corresponding to the product description.</p>
@@ -167,6 +166,7 @@ rel="me"           href="mailto:chananakashish1998@gmail.com"
 <p><code>Royal Comfort Linens</code>
 </p>
 </blockquote>
+<hr>
 <h2>Simple Sequential Chain</h2>
 <p>A simple sequential chain functions as an integrated pipeline, formed by arranging two simple chains in succession. First, we feed the input data into the initial chain, which generates an output. This output then serves as the input for the second chain to produce the final result. This operation always follows a sequential pattern, with the first chain executing before the second, maintaining a fixed, predetermined order.</p>
 <p>Building on the same example from above.</p>
@@ -202,6 +202,7 @@ rel="me"           href="mailto:chananakashish1998@gmail.com"
 <p>The first chain takes the product description and returns the best name for the company. The second chain takes the company name and generates a 20-word description of the company. By combining these chains in a simple sequential chain, you can get the company name and description for a given product description.</p>
 <p>💡 The key takeaway here is that the order of operations remains fixed and adheres to the following sequence: 
 Provide input to chain 1 &gt; Retrieve output from chain 1 &gt; Transmit the output from chain 1 to chain 2 &gt; Obtain output from chain 2.</p>
+<hr>
 <h2>Sequential Chains with Multiple Inputs/Outputs</h2>
 <p>In some cases, you may have chains with multiple inputs or outputs. </p>
 <p><img alt="LangChain" src="images/LangChainU.png"></p>
@@ -275,6 +276,7 @@ Provide input to chain 1 &gt; Retrieve output from chain 1 &gt; Transmit the out
  <span class="s1">&#39;followup_message&#39;</span><span class="p">:</span> <span class="s2">&quot;Réponse de suivi:</span><span class="se">\n\n</span><span class="s2">Nous sommes désolés d&#39;apprendre que vous avez été déçu par le goût de notre produit. Nous sommes dévoués à la satisfaction de nos clients et nous prenons cette question très au sérieux. Nous aimerions en savoir plus sur votre expérience pour mieux comprendre ce qui a pu causer ce problème. Pourriez-vous nous fournir plus de détails sur le produit que vous avez acheté et où vous l&#39;avez acheté? Comme vous l&#39;avez mentionné, il est possible que vous ayez reçu un ancien lot ou un produit contrefait, ce qui pourrait avoir un impact sur la qualité. Nous aimerions vous offrir un remboursement ou un produit de remplacement pour résoudre cette situation. Merci de nous donner l&#39;occasion de corriger cette erreur et de regagner votre confiance.&quot;</span><span class="p">}</span>
 </code></pre></div>
 
+<hr>
 <h2>Router Chains</h2>
 <p>Router Chains allow to dynamically select a pre-defined chain from a set of chains for a given input. Router chains are used to route inputs to different subchains based on specific criteria. </p>
 <p>You define prompts for different subjects (physics, math, history, computer science) and create a router chain to decide which subchain to use based on the input subject. You import the necessary components (multi-prompt chain, LLM router chain, router output parser) and define the language model and destination chains. By combining these elements, you create a router chain that routes inputs to the appropriate subchain.</p>
