@@ -1,3 +1,0 @@
-[submodule "plugins/pilosus_pelican_word_count"]
-	path = plugins/pilosus_pelican_word_count
-	url = https://github.com/pilosus/pilosus_pelican_word_count
