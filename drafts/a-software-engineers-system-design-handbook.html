@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://kashishchanana.github.io/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://kashishchanana.github.io/theme/pygments/friendly.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="https://kashishchanana.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://kashishchanana.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://kashishchanana.github.io/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+<meta name="author" content="Kashish Chanana" />
+<meta name="description" content="Table of Contents Understanding Computer Architecture: The Building Blocks of Modern Systems Components of a Computer System Moore’s Law Interaction Between Components Understanding Computer Architecture: The Building Blocks of Modern Systems Before diving into system design, it’s crucial to first understand the fundamental building blocks of a computer …" />
+<meta name="keywords" content="">
+
+
+  <meta property="og:site_name" content="Hitchhiker's Guide To AI"/>
+  <meta property="og:title" content="A Software Engineer&#39;s System Design Handbook"/>
+  <meta property="og:description" content="Table of Contents Understanding Computer Architecture: The Building Blocks of Modern Systems Components of a Computer System Moore’s Law Interaction Between Components Understanding Computer Architecture: The Building Blocks of Modern Systems Before diving into system design, it’s crucial to first understand the fundamental building blocks of a computer …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://kashishchanana.github.io/drafts/a-software-engineers-system-design-handbook.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2024-09-08 00:00:00-07:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://kashishchanana.github.io/author/kashish-chanana.html">
+  <meta property="article:section" content="System Design"/>
+  <meta property="og:image" content="images/test/ai.png">
+
+  <title>Hitchhiker's Guide To AI &ndash; A Software Engineer&#39;s System Design Handbook</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://kashishchanana.github.io/">
+      <img src="images/test/ai.png" alt="" title="">
+    </a>
+
+    <h1>
+      <a href="https://kashishchanana.github.io/"></a>
+    </h1>
+
+    <p>Honestly started as a note-taking exercise!</p>
+
+
+
+    <ul class="social">
+      <li>
+        <a class="sc-github"
+           href="https://github.com/KashishChanana"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/kashishchanana/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-twitter"
+           href="https://twitter.com/chankashish"
+           target="_blank">
+          <i class="fa-brands fa-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-envelope"
+rel="me"           href="mailto:chananakashish1998@gmail.com"
+           target="_blank">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://kashishchanana.github.io/">Home</a>
+
+  <a href="/archives">Archives</a>
+  <a href="/categories">Categories</a>
+  <a href="/tags">Tags</a>
+
+
+</nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="a-software-engineers-system-design-handbook">A Software Engineer's System Design Handbook</h1>
+    <p>
+      Posted on Sun 08 September 2024 in <a href="https://kashishchanana.github.io/category/system-design.html">System Design</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#understanding-computer-architecture-the-building-blocks-of-modern-systems">Understanding Computer Architecture: The Building Blocks of Modern Systems</a><ul>
+<li><a href="#components-of-a-computer-system">Components of a Computer System</a></li>
+<li><a href="#moores-law">Moore’s Law</a></li>
+<li><a href="#interaction-between-components">Interaction Between Components</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h3 id="understanding-computer-architecture-the-building-blocks-of-modern-systems">Understanding Computer Architecture: The Building Blocks of Modern Systems</h3>
+<p>Before diving into system design, it’s crucial to first understand the fundamental building blocks of a computer. These components—the disk, RAM, CPU, and caches—are the core of any computing system. They not only form the basis of a computer's operation but also have a significant impact on how we design software and larger distributed systems.</p>
+<h4 id="components-of-a-computer-system">Components of a Computer System</h4>
+<ol>
+<li>Disk</li>
+</ol>
+<p>The disk is the primary storage device in a computer and plays a crucial role in maintaining persistent data. Persistence means that the information stored on a disk remains intact even after the machine is turned off. Modern disks store data in terabytes (TBs), where 1 terabyte equals 1 trillion bytes. Disks are available in two common forms:</p>
+<p>HDD (Hard Disk Drive): HDDs are mechanical storage devices with moving parts. They read and write data using a mechanical arm that moves over a spinning disk. Over time, this mechanical system can degrade, leading to slower performance.</p>
+<p>SSD (Solid-State Drive): SSDs, in contrast, do not have any moving parts and are significantly faster than HDDs. They store and retrieve data electronically, similar to RAM, which makes them more efficient. However, they tend to be more expensive than HDDs.</p>
+<p>Both HDDs and SSDs are forms of non-volatile storage, meaning that the data is retained even after power loss. SSDs are increasingly replacing HDDs due to their superior speed and reliability.</p>
+<ol>
+<li>RAM (Random Access Memory)
+RAM is used for temporarily storing data that the CPU might need to access quickly. It is much faster than disk storage but smaller in size, typically ranging from 1GB to 128GB. The key advantage of RAM is its speed, enabling data to be written and read in microseconds, which is much faster than writing to disk.</li>
+</ol>
+<p>RAM is considered volatile memory because it only retains information as long as the computer is powered on. Once the system is shut down, any data stored in RAM is erased. This is why saving work to a disk is important—so the data persists even after a shutdown. RAM’s role is to hold running applications and active processes, providing the CPU with immediate access to data and instructions.</p>
+<ol>
+<li>CPU (Central Processing Unit)
+The CPU, often referred to as the "brain" of the computer, handles all computation and processing tasks. It is responsible for fetching, decoding, and executing instructions, which are usually stored in RAM. When you run a program, it translates into a set of binary instructions that the CPU reads and acts upon. The CPU works at lightning speeds, performing operations like addition, subtraction, and multiplication in mere milliseconds.</li>
+</ol>
+<p>The CPU also manages data transfer between RAM and the disk. For example, if you open a file, the CPU retrieves the necessary data from the disk and loads it into RAM for faster access. In this way, the CPU serves as the primary intermediary between storage devices and memory.</p>
+<ol>
+<li>Cache
+The cache is a small, ultra-fast memory located directly on the CPU. It stores frequently accessed data to prevent the CPU from having to retrieve it from the slower RAM or disk. Most modern CPUs are equipped with multiple levels of cache—L1, L2, and L3—each progressively larger and slower but still much faster than RAM. The cache is crucial for reducing the time it takes for the CPU to access data.</li>
+</ol>
+<p>The concept of caching extends beyond computer architecture. For example, web browsers cache web pages to load them faster on subsequent visits by storing commonly used resources like HTML, CSS, and JavaScript files. Similarly, the CPU’s cache helps speed up data access by storing frequently used information close to the processing unit.</p>
+<h4 id="moores-law">Moore’s Law</h4>
+<p>Moore's Law is a prediction made by Gordon Moore, co-founder of Intel, which states that the number of transistors in a CPU doubles approximately every two years. As the number of transistors increases, so does the processing power of CPUs, while the cost of computing continues to decrease. However, in recent years, the pace of this exponential growth has started to slow down, and we are approaching the physical limitations of transistor-based computing.</p>
+<h4 id="interaction-between-components">Interaction Between Components</h4>
+<p>To understand the relationship between the components discussed, it’s helpful to visualize the following:</p>
+<p>The CPU fetches instructions from RAM.
+If the data the CPU needs is stored in the cache, it retrieves it from there first (this is the fastest route).
+If the data is not in the cache, the CPU will check RAM (slower than cache but still fast).
+If the data isn’t in RAM, the CPU will read it from the disk, which is much slower compared to RAM and cache.</p>
+<p>Each of these components—disk, RAM, CPU, and cache—plays a vital role in system performance. The disk provides persistent storage, RAM offers fast, temporary data access, the CPU executes computations, and the cache ensures the most frequently accessed data is retrieved as quickly as possible.</p>
+<p>Understanding how these components interact is fundamental for designing efficient systems, from personal computers to large-scale distributed applications. </p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2024 Kashish Chanana</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Hitchhiker's Guide To AI ",
+  "url" : "https://kashishchanana.github.io",
+  "image": "images/test/ai.png",
+  "description": ""
+}
+</script>
+</body>
+</html>
