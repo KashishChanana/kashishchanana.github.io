@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://kashishchanana.github.io/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://kashishchanana.github.io/theme/pygments/friendly.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="https://kashishchanana.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://kashishchanana.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://kashishchanana.github.io/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+<meta name="author" content="Kashish Chanana" />
+<meta name="description" content="Table of Contents How to use ngrams in a neural net or other ml classifiers? 1. What are N-grams? 2. Steps to Use N-grams in ML Classifiers a. Preprocessing the Text b. Feature Extraction c. Using N-grams in Classifiers d. Evaluate the Model 3. When to Use N-grams 4. Challenges …" />
+<meta name="keywords" content="Algorithms, Machine Learning">
+
+
+  <meta property="og:site_name" content="Hitchhiker's Guide To AI"/>
+  <meta property="og:title" content="A Notebook of Misc ML Implementation Details"/>
+  <meta property="og:description" content="Table of Contents How to use ngrams in a neural net or other ml classifiers? 1. What are N-grams? 2. Steps to Use N-grams in ML Classifiers a. Preprocessing the Text b. Feature Extraction c. Using N-grams in Classifiers d. Evaluate the Model 3. When to Use N-grams 4. Challenges …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://kashishchanana.github.io/a-notebook-of-misc-ml-implementation-details.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2025-01-25 00:00:00-08:00"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://kashishchanana.github.io/author/kashish-chanana.html">
+  <meta property="article:section" content="Scratch"/>
+  <meta property="article:tag" content="Algorithms"/>
+  <meta property="article:tag" content="Machine Learning"/>
+  <meta property="og:image" content="images/test/ai.png">
+
+  <title>Hitchhiker's Guide To AI &ndash; A Notebook of Misc ML Implementation Details</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://kashishchanana.github.io/">
+      <img src="images/test/ai.png" alt="" title="">
+    </a>
+
+    <h1>
+      <a href="https://kashishchanana.github.io/"></a>
+    </h1>
+
+    <p>Honestly started as a note-taking exercise!</p>
+
+
+
+    <ul class="social">
+      <li>
+        <a class="sc-github"
+           href="https://github.com/KashishChanana"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/kashishchanana/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-twitter"
+           href="https://twitter.com/chankashish"
+           target="_blank">
+          <i class="fa-brands fa-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-envelope"
+rel="me"           href="mailto:chananakashish1998@gmail.com"
+           target="_blank">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://kashishchanana.github.io/">Home</a>
+
+  <a href="/archives">Archives</a>
+  <a href="/categories">Categories</a>
+  <a href="/tags">Tags</a>
+
+
+</nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="a-notebook-of-misc-ml-implementation-details">A Notebook of Misc ML Implementation Details</h1>
+    <p>
+      Posted on Sat 25 January 2025 in <a href="https://kashishchanana.github.io/category/scratch.html">Scratch</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#how-to-use-ngrams-in-a-neural-net-or-other-ml-classifiers">How to use ngrams in a neural net or other ml classifiers?</a><ul>
+<li><a href="#1-what-are-n-grams">1. What are N-grams?</a></li>
+<li><a href="#2-steps-to-use-n-grams-in-ml-classifiers">2. Steps to Use N-grams in ML Classifiers</a><ul>
+<li><a href="#a-preprocessing-the-text">a. Preprocessing the Text</a></li>
+<li><a href="#b-feature-extraction">b. Feature Extraction</a></li>
+<li><a href="#c-using-n-grams-in-classifiers">c. Using N-grams in Classifiers</a></li>
+<li><a href="#d-evaluate-the-model">d. Evaluate the Model</a></li>
+</ul>
+</li>
+<li><a href="#3-when-to-use-n-grams">3. When to Use N-grams</a></li>
+<li><a href="#4-challenges-and-tips">4. Challenges and Tips</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr>
+<h2 id="how-to-use-ngrams-in-a-neural-net-or-other-ml-classifiers"><strong>How to use ngrams in a neural net or other ml classifiers?</strong></h2>
+<p>Using n-grams in neural networks or other machine learning classifiers is common when working with text data. Here's how you can use them effectively:</p>
+<h3 id="1-what-are-n-grams">1. What are N-grams?</h3>
+<p>N-grams are contiguous sequences of <code>n</code> items (words, characters, etc.) extracted from a given text. For example, with <code>n=2</code> (bigrams), the sentence "I love ML" becomes:<br>
+<code>["I love", "love ML"]</code>.</p>
+<h3 id="2-steps-to-use-n-grams-in-ml-classifiers">2. Steps to Use N-grams in ML Classifiers</h3>
+<h4 id="a-preprocessing-the-text">a. Preprocessing the Text</h4>
+<ol>
+<li>
+<p>Tokenization: Split the text into tokens (e.g., words or characters).<br>
+   Example: <code>"I love ML"</code> → <code>["I", "love", "ML"]</code></p>
+</li>
+<li>
+<p>Generate N-grams: Use an n-gram generator to extract n-grams from tokens.<br>
+   Example (bigrams):<br>
+<code>["I", "love", "ML"]</code> → <code>["I love", "love ML"]</code></p>
+</li>
+</ol>
+<h4 id="b-feature-extraction">b. Feature Extraction</h4>
+<ul>
+<li>Convert n-grams into a numerical representation:</li>
+<li>Count Vectorization: Count the frequency of each n-gram in the text.<br>
+     Example: <code>["I love", "love ML"]</code> → <code>{"I love": 1, "love ML": 1}</code></li>
+<li>TF-IDF Vectorization: Adjust the frequency by importance (Term Frequency-Inverse Document Frequency).</li>
+<li>Embedding: Use word/character embeddings (e.g., Word2Vec, GloVe, BERT) to create dense vector representations of n-grams.</li>
+</ul>
+<p>Libraries:<br>
+- Scikit-learn: For <code>CountVectorizer</code> or <code>TfidfVectorizer</code>.<br>
+- SpaCy/NLTK: For text tokenization and n-gram generation.</p>
+<h4 id="c-using-n-grams-in-classifiers">c. Using N-grams in Classifiers</h4>
+<p><strong>1. Traditional ML Classifiers:</strong></p>
+<ul>
+<li>After vectorizing n-grams, input them into classifiers like:<ul>
+<li>Logistic Regression</li>
+<li>SVM</li>
+<li>Random Forest</li>
+<li>Gradient Boosting (e.g., XGBoost, CatBoost)</li>
+</ul>
+</li>
+<li>Example Code:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+
+<span class="c1"># Generate n-grams and vectorize</span>
+<span class="n">vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">(</span><span class="n">ngram_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># Use unigrams and bigrams</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">vectorizer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">([</span><span class="s2">&quot;I love ML&quot;</span><span class="p">,</span> <span class="s2">&quot;ML is fun&quot;</span><span class="p">])</span>
+
+<span class="c1"># Train a classifier</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>  <span class="c1"># Labels: 1 for positive, 0 for negative</span>
+</code></pre></div>
+
+<p><strong>2. Neural Networks:</strong></p>
+<ul>
+<li>Input n-grams as sequences into a neural network:<ul>
+<li>Dense NN: Use n-gram features as dense vectors.</li>
+<li>Recurrent NN (RNNs): Process sequential n-grams (e.g., <code>["I love", "love ML"]</code>).</li>
+<li>Convolutional NN (CNNs): Capture patterns in n-gram sequences for tasks like text classification.</li>
+</ul>
+</li>
+<li>Example Code (Embedding + RNN):</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Tokenizer</span><span class="p">()</span>
+<span class="n">tokenizer</span><span class="o">.</span><span class="n">fit_on_texts</span><span class="p">([</span><span class="s2">&quot;I love ML&quot;</span><span class="p">,</span> <span class="s2">&quot;ML is fun&quot;</span><span class="p">])</span>
+<span class="n">sequences</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">texts_to_sequences</span><span class="p">([</span><span class="s2">&quot;I love ML&quot;</span><span class="p">])</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">output_dim</span><span class="o">=</span><span class="mi">64</span><span class="p">),</span>  <span class="c1"># Word embeddings</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">128</span><span class="p">),</span>  <span class="c1"># Recurrent layer</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)</span>  <span class="c1"># Classification</span>
+<span class="p">])</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+</code></pre></div>
+
+<p><strong>3. Using BERT embeddings with Neural Networks:</strong></p>
+<ul>
+<li>Contextual models like BERT provide embeddings based on the context of the word or n-gram.
+    For n-grams, you can:<ul>
+<li>Extract embeddings for individual tokens and average or concatenate them.</li>
+<li>Extract embeddings for the full n-gram using the CLS token or other pooling methods.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">BertTokenizer</span><span class="p">,</span> <span class="n">BertModel</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="c1"># 1. Load BERT tokenizer and model</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">BertTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;bert-base-uncased&quot;</span><span class="p">)</span>
+<span class="n">bert_model</span> <span class="o">=</span> <span class="n">BertModel</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;bert-base-uncased&quot;</span><span class="p">)</span>
+
+<span class="c1"># 2. Prepare the text data</span>
+<span class="n">n_grams</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;I love ML&quot;</span><span class="p">,</span> <span class="s2">&quot;ML is fun&quot;</span><span class="p">,</span> <span class="s2">&quot;Deep learning rocks&quot;</span><span class="p">,</span> <span class="s2">&quot;I enjoy AI&quot;</span><span class="p">]</span>  <span class="c1"># Example n-grams</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># Binary classification labels</span>
+
+<span class="c1"># 3. Generate embeddings for each n-gram</span>
+<span class="k">def</span> <span class="nf">get_bert_embeddings</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
+    <span class="n">embeddings</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">:</span>
+        <span class="c1"># Tokenize the input text</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+        <span class="c1"># Get BERT outputs</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="o">**</span><span class="n">inputs</span><span class="p">)</span>
+            <span class="c1"># Pool embeddings using mean pooling across the sequence length</span>
+            <span class="n">pooled_embedding</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">outputs</span><span class="o">.</span><span class="n">last_hidden_state</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">embeddings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pooled_embedding</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">embeddings</span><span class="p">)</span>
+
+<span class="c1"># Generate BERT embeddings for the n-grams</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">get_bert_embeddings</span><span class="p">(</span><span class="n">n_grams</span><span class="p">,</span> <span class="n">bert_model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+
+<span class="c1"># Check shape of the embeddings</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shape of X_train: </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Output: (4, 768) for 4 n-grams and 768-dimensional BERT embeddings</span>
+
+<span class="c1"># 4. Build and train a simple neural network with TensorFlow</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">768</span><span class="p">,)),</span>  <span class="c1"># Input is 768-dimensional BERT embedding</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">),</span>  <span class="c1"># Hidden layer</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;sigmoid&quot;</span><span class="p">)</span>  <span class="c1"># Output layer for binary classification</span>
+<span class="p">])</span>
+
+<span class="c1"># Compile the model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;binary_crossentropy&quot;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">])</span>
+
+<span class="c1"># Train the model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Predict on new data</span>
+<span class="n">new_n_grams</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;AI is amazing&quot;</span><span class="p">,</span> <span class="s2">&quot;I dislike ML&quot;</span><span class="p">]</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">get_bert_embeddings</span><span class="p">(</span><span class="n">new_n_grams</span><span class="p">,</span> <span class="n">bert_model</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Predictions: </span><span class="si">{</span><span class="n">predictions</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<ul>
+<li>
+<p>Key Details</p>
+<ol>
+<li>
+<p>BERT Tokenization:
+Each n-gram is tokenized into subwords using BertTokenizer.
+Padding and truncation ensure uniform sequence lengths.</p>
+</li>
+<li>
+<p>BERT Embeddings:
+outputs.last_hidden_state contains embeddings for all tokens.
+Mean pooling is applied across the sequence to get a fixed-size vector (768 dimensions for bert-base-uncased).</p>
+</li>
+<li>
+<p>Neural Network:
+A simple feedforward neural network is used to classify the BERT embeddings.
+Adjust the architecture (e.g., more layers, dropout) based on the complexity of your task.</p>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="d-evaluate-the-model">d. Evaluate the Model</h4>
+<ul>
+<li>Use appropriate evaluation metrics based on the task:</li>
+<li>Accuracy: For balanced datasets.</li>
+<li>Precision, Recall, F1-Score: For imbalanced datasets.</li>
+<li>ROC-AUC: For binary classification.</li>
+</ul>
+<h3 id="3-when-to-use-n-grams">3. When to Use N-grams</h3>
+<ul>
+<li>Unigrams: Individual tokens; good for general-purpose tasks.  </li>
+<li>Bigrams/Trigrams: Capture word sequences and context (e.g., "New York City").  </li>
+<li>Higher-order N-grams: Useful for capturing more extended dependencies but can lead to high dimensionality and sparsity.</li>
+</ul>
+<h3 id="4-challenges-and-tips">4. Challenges and Tips</h3>
+<ul>
+<li>Dimensionality: N-grams increase feature space exponentially; use dimensionality reduction or embeddings.</li>
+<li>Sparsity: Use models like SVM or Naive Bayes that handle sparse data well.</li>
+<li>Data Overfitting: Higher n-values may cause overfitting; use regularization.</li>
+</ul>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://kashishchanana.github.io/tag/algorithms.html">Algorithms</a>
+      <a href="https://kashishchanana.github.io/tag/machine-learning.html">Machine Learning</a>
+    </p>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2024 Kashish Chanana</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Hitchhiker's Guide To AI ",
+  "url" : "https://kashishchanana.github.io",
+  "image": "images/test/ai.png",
+  "description": ""
+}
+</script>
+</body>
+</html>

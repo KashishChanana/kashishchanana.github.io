@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://kashishchanana.github.io/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://kashishchanana.github.io/theme/pygments/friendly.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="https://kashishchanana.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://kashishchanana.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://kashishchanana.github.io/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+<meta name="author" content="Kashish Chanana" />
+<meta name="description" content="Table of Contents 1. Understand the Type of Drift 1.1 Feature Drift 1.2 Concept Drift 2. Investigate and Diagnose the Drift 3. Take Action Based on the Drift Type 3.1 For Feature Drift 3.2 For Concept Drift 4. Deploy Mitigation Strategies 4.1 Data Drift Alerts …" />
+<meta name="keywords" content="ML System Design">
+
+
+  <meta property="og:site_name" content="Hitchhiker's Guide To AI"/>
+  <meta property="og:title" content="Machine Learning Model Monitoring and Drift Detection"/>
+  <meta property="og:description" content="Table of Contents 1. Understand the Type of Drift 1.1 Feature Drift 1.2 Concept Drift 2. Investigate and Diagnose the Drift 3. Take Action Based on the Drift Type 3.1 For Feature Drift 3.2 For Concept Drift 4. Deploy Mitigation Strategies 4.1 Data Drift Alerts …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://kashishchanana.github.io/machine-learning-model-monitoring-and-drift-detection.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2025-01-26 00:00:00-08:00"/>
+  <meta property="article:modified_time" content="2025-01-26 00:00:00-08:00"/>
+  <meta property="article:author" content="https://kashishchanana.github.io/author/kashish-chanana.html">
+  <meta property="article:section" content="misc"/>
+  <meta property="article:tag" content="ML System Design"/>
+  <meta property="og:image" content="images/test/ai.png">
+
+  <title>Hitchhiker's Guide To AI &ndash; Machine Learning Model Monitoring and Drift Detection</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://kashishchanana.github.io/">
+      <img src="images/test/ai.png" alt="" title="">
+    </a>
+
+    <h1>
+      <a href="https://kashishchanana.github.io/"></a>
+    </h1>
+
+    <p>Honestly started as a note-taking exercise!</p>
+
+
+
+    <ul class="social">
+      <li>
+        <a class="sc-github"
+           href="https://github.com/KashishChanana"
+           target="_blank">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-linkedin"
+           href="https://www.linkedin.com/in/kashishchanana/"
+           target="_blank">
+          <i class="fa-brands fa-linkedin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-twitter"
+           href="https://twitter.com/chankashish"
+           target="_blank">
+          <i class="fa-brands fa-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="sc-envelope"
+rel="me"           href="mailto:chananakashish1998@gmail.com"
+           target="_blank">
+          <i class="fa-solid fa-envelope"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+</aside>
+  <main>
+
+<nav>
+  <a href="https://kashishchanana.github.io/">Home</a>
+
+  <a href="/archives">Archives</a>
+  <a href="/categories">Categories</a>
+  <a href="/tags">Tags</a>
+
+
+</nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="machine-learning-model-monitoring-and-drift-detection">Machine Learning Model Monitoring and Drift Detection</h1>
+    <p>
+      Posted on Sun 26 January 2025 in <a href="https://kashishchanana.github.io/category/misc.html">misc</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <div class="toc"><span class="toctitle">Table of Contents</span><ul>
+<li><a href="#1-understand-the-type-of-drift">1. Understand the Type of Drift</a><ul>
+<li><a href="#11-feature-drift">1.1 Feature Drift</a></li>
+<li><a href="#12-concept-drift">1.2 Concept Drift</a></li>
+</ul>
+</li>
+<li><a href="#2-investigate-and-diagnose-the-drift">2. Investigate and Diagnose the Drift</a></li>
+<li><a href="#3-take-action-based-on-the-drift-type">3. Take Action Based on the Drift Type</a><ul>
+<li><a href="#31-for-feature-drift">3.1 For Feature Drift</a></li>
+<li><a href="#32-for-concept-drift">3.2 For Concept Drift</a></li>
+</ul>
+</li>
+<li><a href="#4-deploy-mitigation-strategies">4. Deploy Mitigation Strategies</a><ul>
+<li><a href="#41-data-drift-alerts">4.1 Data Drift Alerts</a></li>
+<li><a href="#42-shadow-models">4.2 Shadow Models</a></li>
+<li><a href="#43-retraining-pipelines">4.3 Retraining Pipelines</a></li>
+<li><a href="#44-ensemble-models">4.4 Ensemble Models</a></li>
+<li><a href="#45-robust-models">4.5 Robust Models</a></li>
+</ul>
+</li>
+<li><a href="#5-continuous-monitoring-and-evaluation">5. Continuous Monitoring and Evaluation</a></li>
+<li><a href="#6-tools-for-drift-management">6. Tools for Drift Management</a></li>
+<li><a href="#example-workflow">Example Workflow</a></li>
+</ul>
+</div>
+<p>If there is a drift in the distribution of data, it means the data seen during model inference differs significantly from the data used during training. This can degrade model performance and necessitates action. Here's a structured approach to handling data drift:</p>
+<h3 id="1-understand-the-type-of-drift">1. Understand the Type of Drift</h3>
+<p>There are two primary types of drift:</p>
+<h4 id="11-feature-drift">1.1 Feature Drift</h4>
+<ul>
+<li>Definition: The distribution of one or more features in the input data has changed.</li>
+<li>Example: A sudden increase in the proportion of missing values in a feature.</li>
+<li>Impact: The model may fail to generalize to the new input data.</li>
+</ul>
+<h4 id="12-concept-drift">1.2 Concept Drift</h4>
+<ul>
+<li>Definition: The relationship between input features and the target variable has changed.</li>
+<li>Example: In a fraud detection system, fraud patterns evolve as fraudsters change tactics.</li>
+<li>Impact: The model's predictions may no longer align with the ground truth.</li>
+</ul>
+<h3 id="2-investigate-and-diagnose-the-drift">2. Investigate and Diagnose the Drift</h3>
+<ul>
+<li>Analyze the Drift:<ul>
+<li>Use statistical tests (e.g., Kolmogorov-Smirnov, Jensen-Shannon Divergence) or drift monitoring tools (like Evidently AI, WhyLabs) to identify which features or labels are affected.</li>
+</ul>
+</li>
+<li>Questions to Ask:<ul>
+<li>Is the drift temporary or long-term? (e.g., seasonal changes vs. a permanent shift in user behavior)</li>
+<li>Which features are drifting most?</li>
+<li>How significant is the drift (i.e., does it materially affect predictions)?</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-take-action-based-on-the-drift-type">3. Take Action Based on the Drift Type</h3>
+<h4 id="31-for-feature-drift">3.1 For Feature Drift</h4>
+<p>Feature drift typically arises due to changes in data collection, processing, or external factors.
+Solutions:</p>
+<ol>
+<li>Adjust Preprocessing:<ul>
+<li>Update preprocessing pipelines to handle new data characteristics.</li>
+<li>Example: If a feature has missing values due to a new logging issue, impute those values or retrain the model to handle them.</li>
+</ul>
+</li>
+<li>Reassess Feature Importance:<ul>
+<li>Re-evaluate the importance of drifting features. Remove or reduce the influence of features that no longer contribute meaningfully.</li>
+</ul>
+</li>
+<li>Feature Engineering:<ul>
+<li>Create new features that better capture the underlying patterns in the drifted data.</li>
+</ul>
+</li>
+</ol>
+<h4 id="32-for-concept-drift">3.2 For Concept Drift</h4>
+<p>Concept drift requires adapting the model to the new relationship between features and labels.
+Solutions:</p>
+<ol>
+<li>
+<p>Retrain the Model:</p>
+<ul>
+<li>Retrain the model with the latest data that reflects the new concept.</li>
+<li>Regularly collect and label fresh data to ensure the model adapts to evolving patterns.</li>
+<li>Example: In fraud detection, retrain the model every few weeks to account for new fraud patterns.</li>
+</ul>
+</li>
+<li>
+<p>Use Adaptive Models:</p>
+<ul>
+<li>Use online learning algorithms or adaptive models that update dynamically as new data arrives.</li>
+<li>Examples: Incremental learning with models like Hoeffding Trees or SGD-based models.</li>
+</ul>
+</li>
+<li>
+<p>Monitor and Enrich the Training Dataset:</p>
+<ul>
+<li>Include data from the drifted period in future training datasets to improve generalization.</li>
+</ul>
+</li>
+</ol>
+<h3 id="4-deploy-mitigation-strategies">4. Deploy Mitigation Strategies</h3>
+<h4 id="41-data-drift-alerts">4.1 Data Drift Alerts</h4>
+<ul>
+<li>Set up automated systems to detect drift and alert the team.</li>
+<li>Example: Use tools like Evidently AI or AWS SageMaker Model Monitor to monitor input data distributions and detect anomalies.</li>
+</ul>
+<h4 id="42-shadow-models">4.2 Shadow Models</h4>
+<ul>
+<li>Deploy a shadow model trained on recent data and compare its predictions with the live model.</li>
+<li>If the shadow model outperforms the live model, promote it to production.</li>
+</ul>
+<h4 id="43-retraining-pipelines">4.3 Retraining Pipelines</h4>
+<ul>
+<li>Automate the retraining pipeline:</li>
+<li>Regularly retrain the model with recent data.</li>
+<li>Use CI/CD pipelines to deploy updated models seamlessly.</li>
+<li>Tools: MLflow, Kubeflow, TensorFlow Extended (TFX).</li>
+</ul>
+<h4 id="44-ensemble-models">4.4 Ensemble Models</h4>
+<ul>
+<li>Use an ensemble of models to handle drift:</li>
+<li>Combine the original model with models trained on new data.</li>
+<li>Use ensemble techniques (e.g., weighted averages, stacking).</li>
+</ul>
+<h4 id="45-robust-models">4.5 Robust Models</h4>
+<ul>
+<li>Train robust models that are less sensitive to drift:</li>
+<li>Example: Tree-based models (e.g., Random Forests, XGBoost) are often more resilient to feature drift.</li>
+</ul>
+<h3 id="5-continuous-monitoring-and-evaluation">5. Continuous Monitoring and Evaluation</h3>
+<ol>
+<li>Monitor Metrics:<ul>
+<li>Continuously monitor model performance metrics (e.g., accuracy, precision, recall).</li>
+<li>If performance drops below a threshold, investigate drift as a possible cause.</li>
+</ul>
+</li>
+<li>Simulate Drift Scenarios:<ul>
+<li>Test the model’s resilience to drift during development by simulating drifted data scenarios.</li>
+</ul>
+</li>
+<li>Feedback Loops:<ul>
+<li>Collect feedback from users or systems to validate predictions and identify drift early.</li>
+</ul>
+</li>
+</ol>
+<h3 id="6-tools-for-drift-management">6. Tools for Drift Management</h3>
+<ul>
+<li>Drift Detection:<ul>
+<li>Evidently AI: Monitors feature and prediction drift with visual dashboards.</li>
+<li>WhyLabs: Tracks drift and anomalies in datasets.</li>
+<li>Alibi Detect: Python library for drift detection and concept drift.</li>
+</ul>
+</li>
+<li>Model Monitoring:<ul>
+<li>Prometheus/Grafana: Custom dashboards and alerting for drift metrics.</li>
+<li>Datadog: Monitors production models and detects anomalies.</li>
+</ul>
+</li>
+</ul>
+<h3 id="example-workflow">Example Workflow</h3>
+<ol>
+<li>Drift Detected:<ul>
+<li>A feature's distribution shifts significantly (e.g., income data starts containing outliers).</li>
+</ul>
+</li>
+<li>Investigate:<ul>
+<li>Analyze the root cause (e.g., data pipeline changes).</li>
+</ul>
+</li>
+<li>Mitigate:<ul>
+<li>Short-Term: Apply preprocessing fixes (e.g., outlier removal).</li>
+<li>Long-Term: Retrain the model on updated data with the drifted features included.</li>
+</ul>
+</li>
+<li>Monitor:<ul>
+<li>Set up alerts to detect future drift early.</li>
+</ul>
+</li>
+</ol>
+<p>By diagnosing and addressing drift systematically, you can ensure your ML system continues to perform well in production. </p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://kashishchanana.github.io/tag/ml-system-design.html">ML System Design</a>
+    </p>
+  </div>
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy; 2024 Kashish Chanana</p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Hitchhiker's Guide To AI ",
+  "url" : "https://kashishchanana.github.io",
+  "image": "images/test/ai.png",
+  "description": ""
+}
+</script>
+</body>
+</html>
